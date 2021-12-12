@@ -4,8 +4,10 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 import React from "react";
 import ReactDOM from "react-dom";
+import {Route, Routes} from 'react-router';
 
 import App from "./App";
+import {BrowserRouter} from "react-router-dom";
 
 // You should replace this url with your own and put it into a .env file
 // See all subgraphs: https://thegraph.com/explorer/
@@ -15,7 +17,12 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+      <BrowserRouter>
+          <Routes>
+          <Route path={"/"} element={<App />}/>
+          <Route path={"/address/:slug"} element={<App />}/>
+          </Routes>
+      </BrowserRouter>
   </ApolloProvider>,
   document.getElementById("root"),
 );

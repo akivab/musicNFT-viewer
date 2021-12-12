@@ -10,6 +10,18 @@ export const Header = styled.header`
   color: white;
 `;
 
+export const MenuItems = styled.div`
+  position: absolute;
+  left: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  min-height: 70px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+`;
+
 export const Body = styled.div`
   align-items: center;
   background-color: #282c34;
@@ -35,7 +47,7 @@ export const Link = styled.a.attrs({
   margin-top: 10px;
 `;
 
-export const Button = styled.button`
+export const ReactButton = styled.button`
   background-color: white;
   border: none;
   border-radius: 8px;
@@ -52,3 +64,4 @@ export const Button = styled.button`
     outline: none;
   }
 `;
+
