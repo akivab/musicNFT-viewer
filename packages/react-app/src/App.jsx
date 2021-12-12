@@ -12,7 +12,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {useMatch} from 'react-router-dom';
 
-const BASE_PATH = '/musicNFT-viewer/address';
 function WalletButton({ provider, loadWeb3Modal, logoutOfWeb3Modal }) {
   const [account, setAccount] = useState("");
   const [rendered, setRendered] = useState("");
@@ -70,9 +69,6 @@ function App() {
   const [address, setAddress] = useState(null);
   const moralisAPI = new MoralisAPI();
 
-  let match = useMatch(`${BASE_PATH}/:slug`);
-  const urlAddress = match && match.params && match.params.slug;
-
   useEffect(() => {
     if (!contractAddress || !contractAddress.length || nfts.length > 0) {
       return;
@@ -83,6 +79,8 @@ function App() {
   }, [contractAddress, moralisAPI]);
 
   useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlAddress = urlParams.get('a');
     if (urlAddress) {
       setContractAddress(urlAddress);
     }
@@ -92,11 +90,11 @@ function App() {
     (async () => {
       const accounts = await provider.listAccounts();
       if (accounts.length > 0) {
-        const newAddress = `${BASE_PATH}/${accounts[0]}`;
+        const newAddress = `?a=${accounts[0]}`;
         setAddress(newAddress);
       }
     })();
-  }, [provider, urlAddress]);
+  }, [provider]);
 
   useEffect(() => {
     console.log(playbackURL);
@@ -106,7 +104,7 @@ function App() {
     const musicNFTHolders = [
       '0x5567c85cbbe24c65c80783b520ea538552f47a88'
     ];
-    return `${BASE_PATH}/${musicNFTHolders[Math.floor(Math.random() * musicNFTHolders.length)]}`;
+    return `?a=${musicNFTHolders[Math.floor(Math.random() * musicNFTHolders.length)]}`;
   };
   return (
     <div>
