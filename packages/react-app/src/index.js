@@ -19,8 +19,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
       <BrowserRouter>
           <Routes>
-          <Route path={"/"} element={<App />}/>
-          <Route path={"/address/:slug"} element={<App />}/>
+          <Route path={"/*"} element={<App />}/>
           </Routes>
       </BrowserRouter>
   </ApolloProvider>,
